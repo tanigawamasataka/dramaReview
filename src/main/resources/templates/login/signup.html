@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/signup.css">
+ <title>Dorama Signup</title>
+</head>
+
+<body>
+ <!-- header -->
+ <header>
+    <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+ <main>
+   <form method="post" th:action="@{/login/signup}" th:object="${signupForm}">
+    <h2>新規ユーザー登録</h2>
+    <br/>
+
+     <!-- ユーザー名の入力エリア -->
+     <div class="msr_text_01">
+      <label>ユーザー名</label>
+      <input type="text" th:field="*{userName}"/>
+     </div>
+
+     <!-- パスワードの入力エリア -->
+     <div class="msr_password_01">
+      <label>パスワード</label>
+      <input type="password" placeholder="8文字以上10文字未満の半角アルファベット" th:field="*{password}"/>
+     </div>
+
+     <!-- ユーザーIDの入力エリア -->
+     <div class="msr_text_01">
+      <label>ユーザーID</label>
+      <input type="text" placeholder="E-mail" th:field="*{userId}"/>
+     </div>
+
+     <!-- 生年月日の入力エリア -->
+     <div class="msr_text_01">
+      <label>生年月日</label>
+      <input type="text" placeholder="yyyy/MM/dd" th:field="*{birthday}"/>
+     </div>
+
+     <!-- 性別の入力エリア -->
+      <p>性別</p>
+      <div th:each="item : ${radioGender}">
+       <input type="radio" class="msr_radio_01" name="radioGender" th:text="${item.key}" th:value="${item.value}" th:field="*{gender}" />
+      </div>
+
+     <!-- 削除フラグ -->
+       <input type="hidden" name="deleted" th:field="*{deleted}"/>
+      <br/>
+
+     <!-- エラーメッセージの一覧表示 -->
+     <ul>
+      <li th:each="error:${#fields.detailedErrors()}">
+       <span th:text="${error.message}">Error message</span>
+      </li>
+     </ul>
+
+     <!-- ユーザー登録ボタン -->
+     <p class="msr_sendbtn_01">
+      <input type="submit" value="新規ユーザー登録">
+     </p>
+  </form>
+ </main>
+</body>
+</html>

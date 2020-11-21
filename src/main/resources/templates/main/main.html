@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/main.css">
+ <title>Drama Main</title>
+</head>
+
+<body>
+ <div id="wrapper">
+
+  <!-- header -->
+  <header>
+      <h1>ドラマ視聴レビュー投稿サイト</h1>
+  </header>
+
+   <!-- ナビゲーション -->
+   <div class="localNavigation">
+    <form method="post" th:action="@{/main}" th:object="${siteSearchForm}">
+     <input type="search" class="form2-input" placeholder="サイト内検索" th:field="*{siteSearch}"/>
+    </form>
+
+    <!-- 未ログイン時に表示 -->
+     <nav>
+      <ul>
+       <li>
+        <div sec:authorize="isAuthenticated() ==  false">
+         <a class="button post" th:href="@{'/login/signup'}">新規ユーザー登録</a>
+        </div>
+       </li>
+       <li>
+        <div sec:authorize="isAuthenticated() == false">
+         <a class="button post" th:href="@{'/login/login'}">ログイン</a>
+        </div>
+       </li>
+     <!-- ログイン後に表示 -->
+       <li>
+        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_GENERAL')">
+         <form  method="post" th:action="@{/logout}">
+          <input type="submit" class="button post" value="ログアウト">
+         </form>
+        </div>
+       </li>
+       <li>
+        <div sec:authorize="hasRole('ADMIN')">
+         <a class="button post2" th:href="@{'/admin/admin'}">アドミン管理</a>
+        </div>
+         <div class="cb"></div>
+       </li>
+      </ul>
+     </nav>
+      <div class="cb"></div>
+   </div>
+
+   <div class="content">
+      <h2>【ドラマ情報一覧】</h2>
+
+        <div class="box" th:each="drama : ${dramaList}">
+         <div id="left">
+           <img th:src="@{/images/{dramaImage}(dramaImage=${drama.dramaImage})}" width="220" height="190" alt="アイキャッチ画像">
+            <h3 th:text="${drama.dramaName}"></h3>
+             <h5>【主演】</h5>
+              <div class="dramaInfo" th:text="${drama.leadActor}"></div>
+             <h5>【公開日】</h5>
+              <div class="dramaInfo" th:text="${#dates.format(drama.releaseDate,'YYYY/MM/dd')}"></div>
+         </div>
+         <div id="right">
+            <h4>【あらすじ】</h4>
+              <div th:text="${drama.dramaStory}"></div>
+         </div>
+           <nav>
+            <div>
+             <a class="button post" th:href="@{/dramaInfo/dramaInfo/{dramaId}(dramaId=${drama.dramaId})}" >レビューを見る</a>
+            </div>
+           </nav>
+           <nav>
+            <div sec:authorize="hasRole('ADMIN')">
+             <a class="button post2" th:href="@{/admin/edit/{dramaId}(dramaId=${drama.dramaId})}">ドラマ情報編集</a>
+            </div>
+           </nav>
+           <div class="star-rating">
+            <div class="star-rating-front" th:style="'width:'+@{${drama.reviewAvg}}+'%'">★★★★★</div>
+            <div class="star-rating-back">★★★★★</div>
+           </div>
+            <div class="cb"></div>
+        </div>
+   </div>
+ </div>
+</body>
+</html>

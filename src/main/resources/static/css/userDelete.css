@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+* {
+  margin:0; padding:0;
+}
+body {
+	display: flex;
+	flex-direction:column;
+}
+
+header{
+	margin-top:20px;
+	width: 960px;
+    height: 70px;
+    background-color: black;
+    color: #ffffff;
+    margin-bottom:10px;
+    margin-right: auto;
+    margin-left:auto;
+}
+
+header h1 {
+	font-size:30px;
+	text-align: center;
+    padding-top:10px;
+}
+
+main{
+    min-height: 100vh;
+    display: flex;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrap {
+  display:flex;
+  flex-flow: column;
+  border:2px #ccc solid;
+  height:900px;
+  margin:0 0 1em;
+}
+
+.content{
+    padding:1em;
+    background-color: #ffffff;
+    text-align: center;
+    margin:0.5em auto;
+    width:900px;
+}
+
+.form2 {
+  position: relative;
+}
+
+.form2-input {
+  box-sizing: border-box;
+  width: 70%;
+  height: 30px;
+  padding: 0 20px 0 34px;
+  margin: 5px 0;
+  font-size: 1em;
+  color: #333;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  outline: 0;
+  transition: 0.3s;
+  -webkit-appearance: none;
+}
+
+.form2-input:focus {
+  border: 1px solid #00b5ad;
+}
+
+.form2-button {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  box-sizing: content-box;
+  width: 30px;
+  height: 40px;
+  padding: 0;
+  vertical-align: vertical-align;
+  pointer-events: none;
+  background: inherit;
+  border: 0;
+  opacity: 0.54;
+}
+
+.button {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  margin-left:10px;
+}
+
+.post {
+  font-weight: bold;
+  color: #fff;
+  background: #00b5ad;
+  border: 1px #00b5ad solid;
+  border-radius: 3px;
+}
+
+@media screen and (max-width: 480px) {
+  .post {
+    display: none;
+  }
+}
+
+.post2{
+  font-weight: bold;
+  color: #fff;
+  background: #ff8080;
+  border: 1px #ff8080 solid;
+  border-radius: 3px;
+}
+
+.cp_table *, .cp_table *:before, .cp_table *:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.cp_table {
+	width: 100%;
+	border-collapse: collapse;
+	border-right: 1px solid #dddddd;
+}
+.cp_table thead th {
+	padding: 5px 5px;
+	border-right: 1px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
+	background: #dddddd;
+}
+.cp_table thead th:last-child {
+	border-right: 1px solid #dddddd;
+}
+.cp_table tbody th {
+	padding: 10px 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ffffff;
+	background: #dddddd;
+	white-space: nowrap;
+}
+.cp_table tbody tr:last-child th {
+	border-bottom: 1px solid #dddddd;
+}
+.cp_table tbody td {
+	padding: 10px 15px;
+	vertical-align: top;
+	border-bottom: 1px solid #dddddd;
+	border-left: 1px solid #dddddd;
+	background: #ffffff;
+}
+@media only screen and (max-width:480px) {
+	.cp_table thead {
+		display: none;
+	}
+	.cp_table tbody th {
+		display: block;
+	}
+	.cp_table tbody td {
+		display: block;
+		padding: 10px 5px;
+	}
+	.cp_table tbody td::before {
+		font-weight: bold;
+		float: left;/*上のth要素が長い場合こちらを解除すると1段落下り見やすくなります*/
+		padding: 0.5em 0;
+		content: attr(label);
+	}
+	.cp_table tbody td p {
+		padding: 1em 0 0 1em;
+    margin: 0;
+	}
+}

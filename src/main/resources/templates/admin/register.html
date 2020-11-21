@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/register.css">
+ <title>Dorama Register</title>
+</head>
+
+<body>
+ <!-- header -->
+ <header>
+    <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+ <main>
+   <form method="post" th:action="@{/admin/register}" th:object="${dramaForm}">
+    <h2>新規ドラマ情報登録</h2>
+    <br/>
+
+     <!-- エラーメッセージの一覧表示 -->
+     <ul>
+      <li th:each="error:${#fields.detailedErrors()}">
+       <span th:text="${error.message}">Error message</span>
+      </li>
+     </ul>
+
+     <!-- ドラマ画像ファイルの入力エリア -->
+     <div class="msr_text_01">
+      <label>ドラマ画像URL</label>
+      <input type="text" th:field="*{dramaImage}"/>
+     </div>
+
+     <!-- ドラマ名の入力エリア -->
+     <div class="msr_text_01">
+      <label>ドラマ名</label>
+      <input type="text" placeholder="20文字以内" th:field="*{dramaName}"/>
+     </div>
+
+     <!-- ドラマあらすじの入力エリア -->
+     <div class="msr_textarea_01">
+      <label>ドラマあらすじ</label>
+      <textarea placeholder="300文字以内" th:field="*{dramaStory}"></textarea>
+     </div>
+
+     <!-- 主演俳優名の入力エリア -->
+     <div class="msr_text_01">
+      <label>主演俳優名</label>
+      <input type="text" th:field="*{leadActor}"/>
+     </div>
+
+     <!-- 公開日の入力エリア -->
+     <div class="msr_text_01">
+      <label>公開日</label>
+      <input type="text" placeholder="yyyy/MM/dd" th:field="*{releaseDate}"/>
+     </div>
+
+     <!-- ドラマ情報登録ボタン -->
+     <p class="msr_sendbtn_01">
+      <input type="submit" value="新規ドラマ情報登録">
+     </p>
+  </form>
+ </main>
+</body>
+</html>

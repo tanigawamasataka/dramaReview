@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/admin.css">
+ <title>Dorama Admin</title>
+</head>
+
+<body>
+  <!-- header -->
+  <header>
+   <h1>ドラマ視聴レビュー投稿サイト</h1>
+  </header>
+  <main>
+   <nav>
+    <div>
+     <a class="button post" th:href="@{'/admin/register'}">ドラマ情報新規登録</a>
+    </div>
+   </nav>
+   <br/>
+   <nav>
+    <div>
+     <a class="button post" th:href="@{'/admin/userDelete'}">ユーザーデータ削除</a>
+    </div>
+   </nav>
+   <br/>
+   <nav>
+    <div>
+     <a class="button post" th:href="@{'/main'}">メイン画面に戻る</a>
+    </div>
+   </nav>
+  </main>
+</body>
+</html>

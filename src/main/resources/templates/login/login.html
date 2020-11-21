@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/login.css">
+ <title>Dorama Login</title>
+</head>
+
+<body>
+ <!-- header -->
+ <header>
+    <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+ <main>
+    <form method="post" th:action="@{/login/login}">
+
+    <!-- エラーメッセージ -->
+    <p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']}!=null"
+     th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}">
+     ログインエラーメッセージ
+    </p>
+
+     <h2>Login</h2>
+     <br/>
+     <div class="msr_text_01">
+      <label>ユーザー名</label>
+      <input type="text" name="userName"/>
+     </div>
+     <div class="msr_password_01">
+      <label>パスワード</label>
+      <input type="password" name="password"/>
+      <br/>
+     </div>
+     <p class="msr_sendbtn_01">
+      <input type="submit" value="ログイン">
+    </form>
+ </main>
+</body>
+</html>

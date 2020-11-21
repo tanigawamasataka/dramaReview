@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/edit.css">
+ <title>Dorama Edit</title>
+</head>
+
+<body>
+ <!-- header -->
+ <header>
+    <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+ <main>
+   <form method="post" th:action="@{/admin/edit}" th:object="${editForm}">
+    <h2>ドラマ情報・更新・削除</h2>
+
+     <!-- エラーメッセージの一覧表示 -->
+     <ul>
+      <li th:each="error:${#fields.detailedErrors()}">
+       <span th:text="${error.message}">Error message</span>
+      </li>
+     </ul>
+
+     <!-- ドラマ画像ファイル名の入力エリア -->
+     <div class="msr_text_01">
+      <label>ドラマ画像URL</label>
+      <input type="text" th:field="*{dramaImage}"/>
+     </div>
+
+     <!-- ドラマ名の入力エリア -->
+      <input type="hidden" th:field="*{dramaId}">
+     <div class="msr_text_01">
+      <label>ドラマ名</label>
+      <input type="text" th:field="*{dramaName}"/>
+     </div>
+
+     <!-- ドラマあらすじの入力エリア -->
+     <div class="msr_textarea_01">
+      <label>ドラマあらすじ</label>
+      <textarea th:field="*{dramaStory}"></textarea>
+     </div>
+
+     <!-- 主演俳優名の入力エリア -->
+     <div class="msr_text_01">
+      <label>主演俳優名</label>
+      <input type="text" th:field="*{leadActor}"/>
+     </div>
+
+     <!-- 公開日の入力エリア -->
+     <div class="msr_text_01">
+      <label>公開日</label>
+      <input type="text" placeholder="yyyy/MM/dd" th:field="*{releaseDate}"/>
+     </div>
+
+     <!-- ドラマ情報更新ボタン -->
+     <p class="msr_sendbtn_01">
+      <input type="submit" name="update" value="更新">
+     </p>
+
+     <!-- ドラマ情報削除ボタン -->
+     <p class="msr_sendbtn_01">
+      <input type="submit" name="delete" value="削除">
+     </p>
+   </form>
+   </main>
+</body>
+</html>

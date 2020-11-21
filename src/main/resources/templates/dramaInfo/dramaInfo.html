@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/dramaInfo.css">
+ <title>Dorama DramaInfo</title>
+</head>
+
+<body>
+ <div id="wrapper">
+
+ <!-- header -->
+ <header>
+   <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+
+  <div class="content">
+
+   <h2>【ドラマ情報】</h2>
+
+    <div class="box">
+     <div id="left">
+      <img th:src="@{/images/{dramaImage}(dramaImage=${drama.dramaImage})}" width="220" height="190" alt="アイキャッチ画像">
+       <h3 th:text="${drama.dramaName}"></h3>
+        <h5>【主演】</h5>
+         <div th:text="${drama.leadActor}"></div>
+        <h5>【公開日】</h5>
+         <div th:text="${#dates.format(drama.releaseDate,'YYYY/MM/dd')}"></div>
+     </div>
+     <div id="right">
+        <h4>【あらすじ】</h4>
+          <div th:text="${drama.dramaStory}"></div>
+     </div>
+      <nav>
+       <ul>
+        <li>
+         <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_GENERAL')">
+          <a class="button post" th:href="@{/dramaInfo/review/{dramaId}(dramaId=${drama.dramaId})}">新規レビュー投稿</a>
+         </div>
+        </li>
+        <li>
+         <a class="button post" th:href="@{'/main'}">メイン画面に戻る</a>
+         <div class="cb"></div>
+        </li>
+       </ul>
+      </nav>
+
+
+      <div class="star-rating">
+       <div class="star-rating-front" th:style="'width:'+@{${drama.reviewAvg}}+'%'">★★★★★</div>
+       <div class="star-rating-back">★★★★★</div>
+      </div>
+       <div class="cb"></div>
+    </div>
+  </div>
+
+  <div class="content">
+   <h4>【レビュー一覧】</h4>
+    <div class="box2" th:each="review : ${reviewList}">
+      <div class="reviewTop">
+         <div class="reviewTitle" th:text="${review.reviewTitle}"></div>
+         <div id="userNameHead">【投稿者】</div>
+         <div class="userName" th:text="${review.userName}"></div>
+         <div class="star-rating2">
+           <div class="star-rating-front2" th:style="'width:'+@{${review.evaluation}}+'%'">★★★★★</div>
+           <div class="star-rating-back2">★★★★★</div>
+         </div>
+            <form method="post" th:action="@{/dramaInfo/dramaInfo}" th:object="${reviewDeleteForm}">
+              <div sec:authorize="hasRole('ADMIN')">
+                <input type="hidden" name="id" th:value="${review.id}"/>
+                <input type="hidden" name="dramaId" th:value="${review.dramaId}"/>
+                <input type="submit" name="delete" value="削除" class="button2 post2">
+              </div>
+            </form>
+         <div class="cb"></div>
+      </div>
+         <div class="reviewText" th:text="${review.reviewText}"></div>
+    </div>
+  </div>
+ </div>
+</body>
+</html>

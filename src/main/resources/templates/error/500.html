@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="UTF-8" />
+ <title>500Error</title>
+ <link rel="stylesheet" href="/css/admin.css">
+ <title>Dorama uniqueError</title>
+</head>
+<body>
+<!-- header -->
+ <header>
+    <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+
+<!-- main -->
+ <main>
+  <div class="content">
+   <p>ユーザー名またはユーザーIDが既に登録されています</p>
+    <br/>
+    <nav>
+      <div>
+        <a class="button post" th:href="@{'/login/signup'}">新規ユーザー登録画面に戻る</a>
+      </div><br/>
+    </nav>
+    </div>
+ </main>
+</body>
+</html>

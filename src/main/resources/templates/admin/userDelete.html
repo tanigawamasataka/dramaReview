@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/userDelete.css">
+ <title>Dorama UserDelete</title>
+</head>
+
+<body>
+ <!-- header -->
+ <header>
+   <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+ <main>
+  <div class="wrap">
+   <div class="content">
+    <form method="post" th:action="@{/admin/userDelete2}" class="form2" th:object="${userSearchForm}">
+     <input type="search" class="form2-input" placeholder="ユーザー名検索"  name="search" th:field="*{userSearch}"/>
+    </form>
+   </div>
+
+   <div class="content">
+    <nav>
+     <div>
+      <a class="button post" th:href="@{'/main'}">メイン画面に戻る</a>
+     </div>
+    </nav>
+   </div>
+
+   <div class="content">
+    <table class="cp_table">
+       <thead>
+        <tr>
+          <th>ユーザーID</th>
+          <th>ユーザー名</th>
+          <th>生年月日</th>
+          <th>性別</th>
+          <th>削除<th>
+        </tr>
+       </thead>
+
+       <tbody>
+        <tr th:each="user : ${userList}" th:if="${user.deleted == false}">
+          <th th:text="${user.userId}"></th>
+          <td th:text="${user.userName}"></td>
+          <td th:text="${#dates.format(user.birthday,'YYYY/MM/dd')}"></td>
+          <td th:text="${user.gender}?'男性':'女性'"></td>
+          <td>
+           <form method="post" th:action="@{/admin/userDelete}" th:object="${userDeleteForm}">
+             <input type="hidden" name="id" th:value="${user.id}"/>
+             <input type="submit" value="削除" class="button post2">
+           </form>
+          </td>
+        </tr>
+       </tbody>
+    </table>
+   </div>
+  </div>
+ </main>
+</body>
+</html>

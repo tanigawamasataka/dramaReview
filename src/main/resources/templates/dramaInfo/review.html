@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+ <meta charset="UTF-8"></meta>
+ <link rel="stylesheet" href="/css/review.css">
+ <title>Dorama Review</title>
+</head>
+
+<body>
+ <!-- header -->
+ <header>
+   <h1>ドラマ視聴レビュー投稿サイト</h1>
+ </header>
+ <main>
+   <form method="post" th:action="@{/dramaInfo/review}" th:object="${reviewForm}">
+    <h2>新規レビュー投稿</h2>
+    <br/>
+
+     <!-- エラーメッセージの一覧表示 -->
+     <ul>
+      <li th:each="error:${#fields.detailedErrors()}">
+       <span th:text="${error.message}">Error message</span>
+      </li>
+     </ul>
+
+     <!-- ドラマ名を取得 -->
+     <input type="hidden" th:field="*{dramaId}" th:value="${dramaId}"/>
+
+     <!-- レビュータイトルの入力エリア -->
+     <div class="msr_text_01">
+      <label>レビュータイトル</label>
+      <input type="text" placeholder="20文字以内" th:field="*{reviewTitle}"/>
+     </div>
+
+     <!-- レビュー内容入力エリア -->
+     <div class="msr_textarea_01">
+      <label>レビュー内容</label>
+      <textarea placeholder="400文字以内" th:field="*{reviewText}"></textarea>
+     </div>
+
+     <!-- 5段階評価 -->
+     <label>視聴評価</label>
+         <div class="rating" th:each="item : ${radioEvaluation}">
+          <input type="radio" name="radioEvaluation" th:text="${item.key}" th:value="${item.value}" th:field="*{evaluation}" >
+         </div>
+         <br/>
+
+     <!-- レビュー投稿ボタン -->
+     <p class="msr_sendbtn_01">
+      <input type="submit" value="新規レビュー投稿">
+     </p>
+  </form>
+ </main>
+</body>
+</html>
